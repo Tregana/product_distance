@@ -1,0 +1,14 @@
+/* vim: set filetype=cpp: */
+#ifndef TREGANA_PRODUCT_DISTANCE
+#define TREGANA_PRODUCT_DISTANCE
+#include <cmath>
+#include <array>
+namespace tregana {
+template<typename F, typename std::enable_if<std::is_floating_point_v<F>>::type* = nullptr>
+F product_distance(const std::array<F, 4>&v) noexcept
+{
+  const auto x{v[2] * v[3]};
+  return std::fma(v[0], v[1], -x) + std::fma(-v[2], v[3], x);
+}
+}//namespace tregana
+#endif//TREGANA_PRODUCT_DISTANCE
